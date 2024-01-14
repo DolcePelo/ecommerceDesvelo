@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const { name, description, price, category, brand, color, size, imageUrl, stock } = req.body;
+    const { name, description, price, category, brand, color, size,code, imageUrl, stock } = req.body;
     try {
         const response = await products.saveProduct({
             name,
@@ -39,6 +39,7 @@ router.post("/", async (req, res) => {
             brand,
             color,
             size,
+            code,
             imageUrl,
             stock
         });
@@ -50,10 +51,10 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { name, description, price, category, brand, color, size, imageUrl, stock } = req.body;
+    const { name, description, price, category, brand, color, size,code, imageUrl, stock } = req.body;
 
     try {
-        const newProduct = { name, description, price, category, brand, color, size, imageUrl, stock };
+        const newProduct = { name, description, price, category, brand, color, size,code, imageUrl, stock };
 
         const response = await products.updateProduct(id, newProduct);
         res.json(response);
