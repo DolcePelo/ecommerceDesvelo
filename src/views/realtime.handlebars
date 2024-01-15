@@ -3,7 +3,7 @@
         <h3>Agregar producto:</h3>
         <div>
             <label>Name:</label>
-            <input type="text" id="title" />
+            <input type="text" id="name" />
         </div>
         <div>
             <label>Description:</label>
@@ -15,7 +15,7 @@
         </div>
         <div>
             <label>ImageUrl:</label>
-            <input type="text" id="thumbnail" />
+            <input type="text" id="imageUrl" />
         </div>
         <div>
             <label>Code:</label>
@@ -32,15 +32,7 @@
         <h3>Eliminar producto:</h3>
         <label>Product ID:</label>
         <input type="text" id="productId" />
-        {{!
-        Comentario:
-        Se agregó el atributo type al botón con valor "butotn". En caso de no hacerlo el valor por default es "submit" y
-        al clickearlo, dicho evento recarga la página de manera que la actualización de la lista no ocurre por la razón
-        esperada.
 
-        Otra posible solución a la recarga es agregear el parámetro "e" al evento creaado en products.js y agregar la
-        línea e.preventDefault()
-        }}
         <button id="deleteProductBtn" type="button">Delete Product</button>
     </form>
 </div>
