@@ -31,13 +31,18 @@ export default class Products {
     };
 
     async saveProduct(product) {
-        let newProduct = new ProductModel(product);
-        let result = await newProduct.save();
-        return result
-    }; 
+        try {
+            let newProduct = new ProductModel(product);
+            let result = await newProduct.save();
+            return result;
+        } catch (error) {
+            console.log('Error: ' + error);
+            throw error;
+        }
+    };
 
-    async updateProduct(id,product) {
-        const result = await ProductModel.updateOne({_id: id},product);
+    async updateProduct(id, product) {
+        const result = await ProductModel.updateOne({ _id: id }, product);
         return result
     };
 
