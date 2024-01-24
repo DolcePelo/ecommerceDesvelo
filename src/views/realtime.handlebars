@@ -22,6 +22,10 @@
             <input type="text" id="code" />
         </div>
         <div>
+            <label>Category:</label>
+            <input type="text" id="category" />
+        </div>
+        <div>
             <label>Stock:</label>
             <input type="text" id="stock" />
         </div>
@@ -49,12 +53,15 @@
             <p>{{this.description}}</p>
             <p>$ {{this.price}}</p>
             <p>{{this.code}}</p>
+            <p>{{this.category}}</p>
             <p>Stock: {{this.stock}}</p>
             <p>{{this.id}}</p>
         </div>
 
     </div>
     {{/each}}
+</div>
+<div class="paginationContainer">
     {{#if hasPrevPage}}
     <a class="prev" href="/realtime?page={{prevPage}}"><button class="pagination-button">Anterior</button></a>
     {{/if}}

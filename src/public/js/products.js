@@ -11,6 +11,7 @@ addProductBtn.addEventListener("click", () => {
     const imageUrl = document.getElementById("imageUrl");
     const code = document.getElementById("code");
     const stock = document.getElementById("stock");
+    const category = document.getElementById("category")
 
     const product = {
         name: name.value,
@@ -18,7 +19,8 @@ addProductBtn.addEventListener("click", () => {
         price: price.value,
         imageUrl: imageUrl.value,
         code: code.value,
-        stock: stock.value
+        stock: stock.value,
+        category: category.value
     };
 
     socket.emit("addProduct", product);
@@ -33,6 +35,7 @@ addProductBtn.addEventListener("click", () => {
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
                 <p>${product.price}</p>
+                <p>${product.category}</p>
                 <p>${product.stock}</p>
                 <p>${product.code}</p>
             </div>
@@ -69,6 +72,7 @@ socket.on("updateProducts", (data) => {
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
                 <p>${product.price}</p>
+                <p>${product.category}</p>
                 <p>${product.stock}</p>
                 <p>${product.code}</p>
             </div>

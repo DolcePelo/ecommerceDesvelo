@@ -31,7 +31,7 @@ router.get("/products", async (req, res) => {
 });
 
 router.get("/realtime", async (req, res) => {
-    const { page = 1, limit = 10, sort = "", query } = req.query;
+    const { page = 1, limit = 8, sort = "", query } = req.query;
 
     const decodedQuery = query ? JSON.parse(decodeURIComponent(query)) : {};
 

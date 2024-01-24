@@ -100,22 +100,30 @@ button:hover {
 }
 
 /* Estilo para los botones de paginación */
+
 .pagination-button {
     display: inline-block;
     padding: 10px 15px;
     margin: 15px;
     text-decoration: none;
-    background-color: #16c444;
+    background-color: #ff6f61;
     color: #fff;
-    border: 1px solid #16c444;
+    border: 1px solid #ff6f61;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .pagination-button:hover {
-    background-color: #3ad276;
+    background-color: #ff8c87;
 }
+
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    margin-top:10px;
+};
+
 
 /* Estilo específico para el botón Anterior */
 .prev {

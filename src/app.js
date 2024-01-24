@@ -56,7 +56,8 @@ socketServer.on("connection", (socket) => {
 		const imageUrl = product.imageUrl;
 		const code = product.code;
 		const stock = product.stock;
-        const newProduct = {name,description,price,imageUrl,code,stock}
+        const category = product.category
+        const newProduct = {name,description,price,imageUrl,code,stock,category}
         try {
             const result = await productManager.saveProduct(
                 newProduct
