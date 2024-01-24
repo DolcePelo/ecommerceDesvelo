@@ -31,10 +31,22 @@ router.get("/products", async (req, res) => {
 });
 
 router.get("/realtime", async (req, res) => {
-    const response = await products.getAll();
+    const { page = 1, limit = 10, sort = "", query } = req.query;
+
+    const decodedQuery = query ? JSON.parse(decodeURIComponent(query)) : {};
+
+    const productsData = await products.getAll(page, limit, sort, decodedQuery);
+    
+    const { docs, hasPrevPage, hasNextPage, totalPages, prevPage, nextPage } = productsData;
+
+    const productsDocs = docs;
     res.render("realtime", {
         title: "Productos en tiempo real",
-        products: response,
+        products: productsDocs,
+        hasPrevPage,
+        hasNextPage,
+        prevPage,
+        nextPage,
         style: "css/products.css",
     });
 });

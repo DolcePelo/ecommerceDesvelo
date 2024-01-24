@@ -49,9 +49,17 @@
             <p>{{this.description}}</p>
             <p>$ {{this.price}}</p>
             <p>{{this.code}}</p>
+            <p>Stock: {{this.stock}}</p>
             <p>{{this.id}}</p>
         </div>
 
     </div>
     {{/each}}
+    {{#if hasPrevPage}}
+    <a class="prev" href="/realtime?page={{prevPage}}"><button class="pagination-button">Anterior</button></a>
+    {{/if}}
+
+    {{#if hasNextPage}}
+    <a class="next" href="/realtime?page={{nextPage}}"><button class="pagination-button">Siguiente</button></a>
+    {{/if}}
 </div>
