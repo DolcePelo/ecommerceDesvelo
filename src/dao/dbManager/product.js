@@ -5,8 +5,23 @@ export default class Products {
         console.log("Working products with database in mongodb")
     };
 
-    async getAll() {
-        let products = await ProductModel.find().lean();
+    async getAll(page = 1, limit = 10, sort = "", query = {}) {
+        let sortOrder = 0;
+
+        if(sort.toLowerCase() === "asc") {
+            sortOrder = 1;
+        } else if (sort.toLowerCase() === "desc") {
+            sortOrder = -1;
+        }
+
+        const options = {
+            page: page,
+            limit: limit,
+            sort: sortOrder ? {price: sortOrder } : undefined,
+            lean: true,
+        };
+
+        const products = await ProductModel.paginate(query, options);
         return products;
     };
 

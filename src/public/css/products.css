@@ -8,8 +8,10 @@ body {
 
 /* Enterprise business color palette */
 :root {
-    --primary-color: #ff6f61; /* Coral red */
-    --secondary-color: #264653; /* Dark teal */
+    --primary-color: #ff6f61;
+    /* Coral red */
+    --secondary-color: #264653;
+    /* Dark teal */
     --text-color: #333;
     --border-color: #ddd;
 }
@@ -96,6 +98,35 @@ button {
 button:hover {
     background-color: var(--secondary-color);
 }
+
+/* Estilo para los botones de paginación */
+.pagination-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 15px;
+    text-decoration: none;
+    background-color: #16c444;
+    color: #fff;
+    border: 1px solid #16c444;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+    background-color: #3ad276;
+}
+
+/* Estilo específico para el botón Anterior */
+.prev {
+    margin-right: 10px;
+}
+
+/* Estilo específico para el botón Siguiente */
+.next {
+    margin-left: 10px;
+}
+
 
 /* Responsive styles */
 @media (max-width: 768px) {

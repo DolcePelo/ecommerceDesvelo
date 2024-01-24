@@ -14,4 +14,11 @@
 
     </div>
     {{/each}}
+    {{#if hasPrevPage}}
+    <a class="prev" href="/products?page={{prevPage}}"><button class="pagination-button">Anterior</button></a>
+    {{/if}}
+
+    {{#if hasNextPage}}
+    <a class="next" href="/products?page={{nextPage}}"><button class="pagination-button">Siguiente</button></a>
+    {{/if}}
 </div>
