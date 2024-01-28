@@ -41,9 +41,9 @@
     </form>
 </div>
 
-<div class="productList">
+<div class="productList realtime">
     {{#each products}}
-    <div class="productCard">
+    <div class="productCard realtime">
         <div class="cardProduct__image">
             <img src="{{this.imageUrl}}" alt="{{this.name}}" />
         </div>
@@ -57,7 +57,9 @@
             <p>Stock: {{this.stock}}</p>
             <p>{{this.id}}</p>
         </div>
-
+        <div class="deleteContainer">
+            <div class="deleteProduct deleteButton" id={{this.id}}>X</div>
+        </div>
     </div>
     {{/each}}
 </div>

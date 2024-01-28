@@ -79,9 +79,9 @@ socketServer.on("connection", (socket) => {
         }
     })
 
-    socket.on("deleteProduct", async (id) => {
+    socket.on("deleteProduct", async (productId) => {
         try {
-            const result = await productManager.deleteProduct(id);
+            const result = await productManager.deleteProduct(productId);
             const allProducts = await productManager.getAll();
 
             socketServer.emit("updateProducts", {

@@ -1,7 +1,7 @@
 const socket = io();
 
 const addProductBtn = document.getElementById("addProductBtn");
-const deleteProductBtn = document.getElementById("deleteProductBtn");
+const deleteProductBtn = document.querySelector(".deleteProduct");
 const productList = document.querySelector(".productList");
 
 addProductBtn.addEventListener("click", () => {
@@ -39,6 +39,9 @@ addProductBtn.addEventListener("click", () => {
                 <p>${product.stock}</p>
                 <p>${product.code}</p>
             </div>
+            <div class="deleteContainer">
+                <div class="deleteProduct" id={{this.id}}>X</div>
+            </div>
         `;
     productList.appendChild(card);
 
@@ -50,10 +53,13 @@ addProductBtn.addEventListener("click", () => {
     stock.value = "";
 });
 
-deleteProductBtn.addEventListener("click", () => {
-    const id = document.getElementById("productId");
-    socket.emit("deleteProduct", id.value);
-    id.value = "";
+const deleteProductBtns = document.querySelectorAll(".deleteButton");
+
+deleteProductBtns.forEach((deleteButton) => {
+    deleteButton.addEventListener("click", (event) => {
+        const productId = event.currentTarget.getAttribute("id");
+        socket.emit("deleteProduct", productId);
+    });
 });
 
 socket.on("updateProducts", (data) => {
@@ -75,6 +81,9 @@ socket.on("updateProducts", (data) => {
                 <p>${product.category}</p>
                 <p>${product.stock}</p>
                 <p>${product.code}</p>
+            </div>
+            <div class="deleteContainer">
+                <div class="deleteProduct deleteButton" id={{this.id}}>X</div>
             </div>
             `;
             productList.appendChild(card);

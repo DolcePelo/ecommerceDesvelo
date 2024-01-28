@@ -10,9 +10,11 @@
             <p>$ {{this.price}}</p>
             <p>{{this.code}}</p>
         </div>
-
+        <button class="addCart">Agregar al carrito</button>
     </div>
     {{/each}}
+</div>
+<div class="paginationContainer">
     {{#if hasPrevPage}}
     <a class="prev" href="/products?page={{prevPage}}"><button class="pagination-button">Anterior</button></a>
     {{/if}}
