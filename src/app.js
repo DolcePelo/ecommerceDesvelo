@@ -8,19 +8,39 @@ import cartRouter from "./routes/cart.route.js";
 import viewsRouter from "./routes/views.route.js";
 import { __dirname } from "./utils.js";
 import Products from "./dao/dbManager/product.js";
+import MongoStore from "connect-mongo";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import loginRouter from "./routes/login.route.js";
+import signupRouter from "./routes/signup.route.js";
+import sessionRouter from "./routes/session.route.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+const COOKIESECRET = process.env.COOKIESECRET;
 
 const DB_URL = process.env.DB_URL || "mongodb:localhost:27017/ecommerce";
 
 const productManager = new Products(DB_URL);
 
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+app.use(cookieParser(COOKIESECRET))
+app.use(
+    session({
+        store: MongoStore.create({
+            mongoUrl: DB_URL,
+            ttl:  60 * 30, // 30 minutes
+        }),
+        secret: COOKIESECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 
 ////////////////////////////
 app.engine("handlebars", handlebars.engine());
@@ -28,9 +48,14 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 ////////////////////////////
 
+// Routes
 app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/", viewsRouter);
+app.use("/login", loginRouter);
+app.use("/signup", signupRouter);
+app.use("/", sessionRouter);
+
 
 const server = app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);

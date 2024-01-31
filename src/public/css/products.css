@@ -10,7 +10,7 @@ body {
 :root {
     --primary-color: #ff6f61;
     /* Coral red */
-    --secondary-color: #264653;
+    --secondary-color: #ff8c87;
     /* Dark teal */
     --text-color: #333;
     --border-color: #ddd;
@@ -89,8 +89,8 @@ body {
     border: 2px solid var(--primary-color);
     border-radius: 50%;
     position: absolute;
-    top: -15px;
-    right: -15px;
+    top: -7px;
+    right: -7px;
     z-index: -1;
 }
 
@@ -140,6 +140,13 @@ button {
 
 button:hover {
     background-color: var(--secondary-color);
+}
+
+.welcome-message {
+    color: var(--primary-color);
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: 600;
 }
 
 /* Estilo para los botones de paginación */
