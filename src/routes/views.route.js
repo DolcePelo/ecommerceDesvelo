@@ -49,7 +49,7 @@
             prevPage,
             nextPage,
             style: "css/products.css",
-            welcomeMessage:  `Bienvenido ${req.session.user}`,
+            welcomeMessage:  `Bienvenido: ${req.session.user}`,
         });
     });
     export default router

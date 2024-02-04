@@ -33,7 +33,7 @@
     </form>
 
     <form id="delete" style="flex: 1; margin-left: 20px;">
-        <div class="welcome-message">{{welcomeMessage}} </div>
+        <div class="welcome-message">{{welcomeMessage}} <span class="logout" id="logout">Logout</span></div>
         <h3>Eliminar producto:</h3>
         <label>Product ID:</label>
         <input type="text" id="productId" />
@@ -73,3 +73,5 @@
     <a class="next" href="/realtime?page={{nextPage}}"><button class="pagination-button">Siguiente</button></a>
     {{/if}}
 </div>
+
+<script src="js/logout.js"></script>

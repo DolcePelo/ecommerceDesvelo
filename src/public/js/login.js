@@ -23,3 +23,4 @@ loginForm.addEventListener("submit", (e) => {
     const password = document.getElementById("password").value;
     postLogin(email, password);
 });
+

@@ -149,6 +149,19 @@ button:hover {
     font-weight: 600;
 }
 
+/* Estilo para el elemento con la clase "signout" */
+.welcome-message .logout {
+    color: #008000;
+    margin-left: 10px; 
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.welcome-message .logout:hover {
+    color: #00cc00;
+}
+
+
 /* Estilo para los botones de paginación */
 
 .pagination-button {
