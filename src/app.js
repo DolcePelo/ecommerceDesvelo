@@ -6,21 +6,22 @@ import handlebars from "express-handlebars";
 import productRouter from "./routes/products.route.js";
 import cartRouter from "./routes/cart.route.js";
 import viewsRouter from "./routes/views.route.js";
-import { __dirname } from "./utils.js";
 import Products from "./dao/dbManager/product.js";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 import cookieParser from "cookie-parser";
+import passport from "passport";
+import initializePassport from "./config/passport.config.js";
 import loginRouter from "./routes/login.route.js";
 import signupRouter from "./routes/signup.route.js";
 import sessionRouter from "./routes/session.route.js";
+import { __dirname } from "./utils.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const COOKIESECRET = process.env.COOKIESECRET;
-
 const DB_URL = process.env.DB_URL || "mongodb:localhost:27017/ecommerce";
 
 const productManager = new Products(DB_URL);
@@ -30,6 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser(COOKIESECRET))
+
+// Configuración de al session
 app.use(
     session({
         store: MongoStore.create({
@@ -47,6 +50,11 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 ////////////////////////////
+
+// Inicializamos passport
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use("/api/products", productRouter);

@@ -10,11 +10,11 @@
 
 .login-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     background: linear-gradient(to bottom, #f8f8f8, #ddd); 
-
+    margin-top: 8rem;
 }
 
 .login-form {
@@ -26,6 +26,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
+    margin-bottom: 10px;
 }
 
 .login-form h2 {
@@ -62,4 +63,18 @@ button {
 
 button:hover {
     background-color: var(--secondary-color);
+}
+
+.forgot-link,
+.signup-link {
+    display: block;
+    margin-top: 10px; /* Ajusta el espacio entre los enlaces y el párrafo anterior */
+    text-align: center; /* Centra los enlaces dentro del contenedor */
+    text-decoration: none; /* Quita el subrayado predeterminado de los enlaces */
+    color: var(--primary-color); /* Utiliza el color primario para los enlaces */
+}
+
+.forgot-link:hover,
+.signup-link:hover {
+    color: var(--secondary-color); /* Cambia el color al pasar el ratón sobre los enlaces */
 }

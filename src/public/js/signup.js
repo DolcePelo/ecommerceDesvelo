@@ -28,9 +28,9 @@ signupForm.addEventListener("submit", async (event) => {
     const password = document.getElementById("password").value;
 
     const result = await postSignup(first_name, last_name, email, password);
-    if (result.respuesta === "Usuario creado con éxito") {
+    if (result.response === "success") {
         window.location.href = "/login";
     } else {
         alert("Datos incorrectos");
-    }
+    } 
 })
