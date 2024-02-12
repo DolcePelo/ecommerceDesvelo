@@ -12,6 +12,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import initializePassport from "./config/passport.config.js";
+import initializeGitHubPassport from "./config/passportGithub.js";
 import loginRouter from "./routes/login.route.js";
 import signupRouter from "./routes/signup.route.js";
 import sessionRouter from "./routes/session.route.js";
@@ -53,6 +54,7 @@ app.set("view engine", "handlebars");
 
 // Inicializamos passport
 initializePassport();
+initializeGitHubPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
