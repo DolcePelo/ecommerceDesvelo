@@ -1,5 +1,6 @@
     import { Router } from "express";
     import Products from "../dao/dbManager/product.js";
+    import { CartModel } from "../dao/models/cart.js";
     import dotenv from "dotenv";
     import { auth } from "../middlewares/index.js";
 
@@ -52,4 +53,22 @@
             welcomeMessage:  `Bienvenido: ${req.session.user}`,
         });
     });
+
+    router.get("/cart/:cid", async (req,res) => {
+        try {
+            const { cid } = req.params;
+            const cart = await CartModel.findById(cid).populate('products.product').lean();
+            if(cart){
+            res.render("cart", {
+                cart: cart._id.toString(),
+                products: cart.products,
+                style: "/css/cart.css",
+            })
+        } else {
+            res.status(404).json({ status: "error", error: "Cart not found"})
+        }
+        } catch (error) {
+            res.status(500).json({ status: "error", error: "Internal error"})
+        }
+    })
     export default router

@@ -49,7 +49,7 @@
     );
 
     router.get(
-        "/realtime/githubcallback",
+        "/githubcallback",
         (req, res, next) => {
             console.log("GitHub Callback initiated");
             next();
@@ -59,7 +59,7 @@
             console.log("GitHub Authentication Successful");
             req.session.user = req.user;
             req.session.role = true;
-            res.redirect("/realtime")
+            res.redirect("/")
         },
         (err, req, res, next) => {
             console.error(err);
