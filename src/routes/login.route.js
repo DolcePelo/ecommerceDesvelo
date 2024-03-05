@@ -1,12 +1,8 @@
 import { Router } from "express";
+import { loginRender } from "../controller/login.controller.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.render("login", {
-        title: "Inicia sesión",
-        style: "/css/login.css"
-    });
-});
+router.get("/", loginRender);
 
 export default router;
