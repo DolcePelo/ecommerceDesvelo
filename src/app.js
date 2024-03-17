@@ -6,6 +6,7 @@ import handlebars from "express-handlebars";
 import productRouter from "./routes/products.route.js";
 import cartRouter from "./routes/cart.route.js";
 import viewsRouter from "./routes/views.route.js";
+import ticketRouter from "./routes/ticket.route.js";
 import Products from "./dao/dbManager/product.js";
 import MongoStore from "connect-mongo";
 import session from "express-session";
@@ -33,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser(COOKIESECRET))
 
-// Configuración de al session
+// Configuración de la session
 app.use(
     session({
         store: MongoStore.create({
@@ -61,6 +62,7 @@ app.use(passport.session());
 // Routes
 app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/ticket", ticketRouter)
 app.use("/", viewsRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);

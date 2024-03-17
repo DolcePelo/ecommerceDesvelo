@@ -9,6 +9,18 @@ const ticketSchema = new mongoose.Schema({
     purchaser: {
         type: mongoose.Types.ObjectId,
         ref: 'users'
+    },
+    products: {
+        type: [{
+            product: {
+                type: mongoose.Types.ObjectId,
+                ref: 'products',
+            },
+            quantity: {
+                type: Number,
+                default: 1,
+            }
+        }]
     }
 });
 
