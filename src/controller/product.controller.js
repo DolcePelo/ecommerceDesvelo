@@ -1,4 +1,7 @@
 import Products from "../dao/dbManager/product.js";
+import CustomError from "../services/CustomError.js";
+import EErrors from "../services/enum.js";
+import { generateProductErrorInfo } from "../services/info.js";
 
 const products = new Products();
 
@@ -43,6 +46,12 @@ const createProduct = async(req, res) => {
         res.json(response)
     } catch (error) {
         console.log('Error al crear el producto', error);
+        CustomError.createError({
+            name: "Error al crear el producto",
+            cause: error,
+            message: "Error al crear el producto",
+            code: EErrors.INVALID_TYPES_ERROR,
+        })
     }
 }
 
