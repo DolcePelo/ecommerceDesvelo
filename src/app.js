@@ -19,6 +19,7 @@ import signupRouter from "./routes/signup.route.js";
 import sessionRouter from "./routes/session.route.js";
 import mokingProduct from "./routes/mokingproducts.route.js"
 import { __dirname } from "./utils.js";
+import { addLogger } from "./utils.js";
 // errorhandler
 // import errorHandler from "./middlewares/errorHandler.js";
 // import EErrors from "./services/enum.js";
@@ -38,6 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser(COOKIESECRET))
+
 // app.use(errorHandler)
 
 // Configuración de la session
@@ -64,6 +66,9 @@ initializePassport();
 initializeGitHubPassport();
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Winston Logger
+app.use(addLogger);
 
 // Routes
 app.use("/api/products", productRouter);

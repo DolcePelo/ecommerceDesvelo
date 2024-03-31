@@ -1,6 +1,10 @@
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { faker } from "@faker-js/faker";
+import winston from "winston";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = dirname(__filename);
@@ -39,4 +43,42 @@ export const generateProducts = () => {
         code: faker.commerce.isbn(),
         description: faker.commerce.productDescription(),
     };
+};
+
+//---------------------------------------------//
+const MODE = process.env.MODE || "dev";
+
+const logger = winston.createLogger({
+    transports: [
+        new winston.transports.Console({ level: 'http' }),
+        new winston.transports.File({ filename: "./errors.log", level: "warn" }),
+    ]
+});
+
+const checkEnvirontment = () => {
+    if (MODE.toUpperCase() === "DEV") {
+        return devLogger;
+    }
+    return prodLogger;
+};
+
+const devLogger = winston.createLogger({
+    transports: [
+        new winston.transports.Console({ level: "verbose" }),
+    ],
+});
+
+const prodLogger = winston.createLogger({
+    transports: [
+        new winston.transports.Console({ level: "http" }),
+        new winston.transports.File({ filename: "./criticalErrors.log", level: "warn" }),
+    ],
+});
+
+export const addLogger = (req, res, next) => {
+
+    req.logger = checkEnvirontment();
+    const textDate = new Date().toISOString();
+    req.logger.http(`${req.method} - ${req.url} - ${textDate}`);
+    next();
 };
