@@ -2,6 +2,8 @@ import express from "express";
 import { Server } from "socket.io";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
 import handlebars from "express-handlebars";
 import productRouter from "./routes/products.route.js";
 import cartRouter from "./routes/cart.route.js";
@@ -33,6 +35,25 @@ const COOKIESECRET = process.env.COOKIESECRET;
 const DB_URL = process.env.DB_URL || "mongodb:localhost:27017/ecommerce";
 
 const productManager = new Products(DB_URL);
+
+// Configuración para la documentación de la app
+const swaggerOptions= {
+    definition: {
+        openapi: '3.0.1',
+        info: {
+            title: 'Documentación Ecommerce API',
+            version: '1.0.0',
+            description:   'API creada para la documentacion del proyecto',
+            contact: {
+                name: 'Alejandro Pelozatto'
+            },
+            servers:  { url: `http://localhost:${PORT}`}
+            },
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`]
+};
+
+const specs = swaggerJSDoc(swaggerOptions);
 
 // Middlewares
 app.use(express.json());
@@ -79,6 +100,7 @@ app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/", sessionRouter);
 app.use("/mokingproducts", mokingProduct);
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 // app.get("*", (req, res) => {
 //     CustomError.createError({
 //         name: "Estas perdido",

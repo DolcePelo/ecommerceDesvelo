@@ -1,0 +1,193 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene todos los productos
+      tags: 
+        - Products
+      responses: 
+        "200":
+          description: Los productos fueron obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+  /api/products/{id}:
+    get:
+      summary: Este endpoint recupera la información de un producto
+      tags: 
+        - Products
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description:  El ID del producto a buscar.
+        schema:
+          $type: string
+      responses: 
+        "200":
+          description: El producto fue obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+    put:
+      summary: Actualiza la información de un producto
+      tags:
+        - Products
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: id del producto que se desea actualizar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/editProduct"
+      responses:
+        "200":
+          description: Producto modificado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: Información proporcionada es inválida
+        "500":
+          description: Error interno del servidor
+
+  /api/products/:
+    post:
+      summary: Este endpoint permite crear un producto
+      tags:
+      - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/createProduct"
+      responses: 
+        "200":
+          description: Producto creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo
+        name:
+          type: String
+          description: Nombre del producto
+        description: 
+          type: String
+          description: Descripción del producto
+        price:
+          type: Number
+          description: Precio del producto
+        imageUrl:
+          type: String
+          description: Url de la imagen del producto
+        code: 
+          type: String
+          description: Codigo del producto
+        category:
+          type: String
+          description: Categoria al que pertenece el producto
+        stock:
+          type: Number
+          description: Cantidad en existencia del producto
+      example: 
+        _id: ObjectId("6abx5s4aca21az")
+        name: "Remera Blanca"
+        description: "La remera blanca es una prenda perfecta para cualquier ocasion."
+        price: 39.99
+        imageUrl: "/images/products/remera-blanca.jpg"
+        code: "RB123"
+        category: "Remeras"
+        stock: 10
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        name:
+          type: String
+          description: Nombre del producto
+        description: 
+          type: String
+          description: Descripción del producto
+        price:
+          type: Number
+          description: Precio del producto
+        imageUrl:
+          type: String
+          description: Url de la imagen del producto
+        code: 
+          type: String
+          description: Codigo del producto
+        category:
+          type: String
+          description: Categoria al que pertenece el producto
+        stock:
+          type: Number
+          description: Cantidad en existencia del producto
+      example: 
+        _id: ObjectId("6abx5s4aca21az")
+        name: "Remera Blanca"
+        description: "La remera blanca es una prenda perfecta para cualquier ocasion."
+        price: 39.99
+        imageUrl: "/images/products/remera-blanca.jpg"
+        code: "RB123"
+        category: "Remeras"
+        stock: 10
+    editProduct:
+      type: object
+      properties:
+        name:
+          type: String
+          description: Nombre del producto
+        description: 
+          type: String
+          description: Descripción del producto
+        price:
+          type: Number
+          description: Precio del producto
+        imageUrl:
+          type: String
+          description: Url de la imagen del producto
+        code: 
+          type: String
+          description: Codigo del producto
+        category:
+          type: String
+          description: Categoria al que pertenece el producto
+        stock:
+          type: Number
+          description: Cantidad en existencia del producto
+      example: 
+        _id: ObjectId("6abx5s4aca21az")
+        name: "Remera Blanca"
+        description: "La remera blanca es una prenda perfecta para cualquier ocasion."
+        price: 39.99
+        imageUrl: "/images/products/remera-blanca.jpg"
+        code: "RB123"
+        category: "Remeras"
+        stock: 10
