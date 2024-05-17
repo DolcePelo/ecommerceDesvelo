@@ -22,6 +22,7 @@ import sessionRouter from "./routes/session.route.js";
 import mokingProduct from "./routes/mokingproducts.route.js"
 import { __dirname } from "./utils.js";
 import { addLogger } from "./utils.js";
+import { helpers } from "./helper/handlebarsHelpers.js";
 // errorhandler
 // import errorHandler from "./middlewares/errorHandler.js";
 // import EErrors from "./services/enum.js";
@@ -77,7 +78,12 @@ app.use(
 );
 
 ////////////////////////////
-app.engine("handlebars", handlebars.engine());
+// Configuración de Handlebars
+const hbs = handlebars.create({
+    helpers 
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 ////////////////////////////
