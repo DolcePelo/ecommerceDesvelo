@@ -69,6 +69,21 @@
     text-align: center;
 }
 
+.cartTotal {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cartTotal p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.cartTotal span {
+    font-weight: bold;
+    margin-left: 5px;
+}
 
 /* Responsive styles */
 @media (max-width: 768px) {
