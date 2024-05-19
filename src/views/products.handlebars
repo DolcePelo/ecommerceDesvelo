@@ -1,3 +1,10 @@
+<div class="cartIconContainer">
+    <div class="cartIcon">
+        <img src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Cart-icon.png" />
+        <span class="cartCount">0</span>
+    </div>
+</div>
+
 <div class="productList">
     {{#each products}}
     <div class="productCard">
@@ -10,7 +17,7 @@
             <p>$ {{this.price}}</p>
             <p>{{this.code}}</p>
         </div>
-        <button class="addCart">Agregar al carrito</button>
+        <button class="addCart" onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
     </div>
     {{/each}}
 </div>
@@ -23,3 +30,5 @@
     <a class="next" href="/products?page={{nextPage}}"><button class="pagination-button">Siguiente</button></a>
     {{/if}}
 </div>
+
+<script src="/js/productsHome.js"></script>

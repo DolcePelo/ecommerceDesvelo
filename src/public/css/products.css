@@ -198,6 +198,41 @@ button:hover {
     margin-left: 10px;
 }
 
+/* Style for the cart icon container */
+.cartIconContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Style for the cart icon */
+.cartIcon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.cartIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Style for the cart item count badge */
+.cartCount {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
 
 /* Responsive styles */
 @media (max-width: 768px) {
