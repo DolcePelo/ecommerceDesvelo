@@ -23,7 +23,19 @@ const getCartById = async (req,res) => {
 const createCart = async (req,res) => {
     try {
         const response = await CartModel.create(req.body);
-        res.json(response);
+        console.log("Respuesta del servidor al intentar crear el carrito:", response); 
+
+        if (!response || !response._id) {
+            console.error("Error al intentar crear el carrito.");
+            return res.status(500).json({ status: "error", error: "Internal error"});
+        }
+
+        res.json({
+            message: "Carrito creado con exito",
+            id: response._id,
+            cart: response,
+            status: "ok"
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({ status: "error", error: "Internal error"});
