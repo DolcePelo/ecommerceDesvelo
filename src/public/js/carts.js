@@ -32,3 +32,37 @@ async function plus(pid) {
 
     window.location.reload();
 }
+
+// Login Modal
+const loginModal = document.getElementById("loginModal");
+const signupModal = document.getElementById("signupModal");
+const modal = document.getElementsByClassName("modal");
+const checkOutBtn = document.getElementsByClassName("checkoutButton")[0];
+const singupLink = document.getElementById("signupLink");
+const loginClose = document.getElementById("login-close");
+const signupClose = document.getElementById("signup-close");
+
+checkOutBtn.onclick = function () {
+    modal[0].style.display = "block";
+};
+
+loginClose.onclick = function () {
+    loginModal.style.display = "none";
+};
+
+signupClose.onclick = function () {
+    signupModal.style.display = "none";
+}
+
+singupLink.onclick = function () {
+    modal[1].style.display = "block";
+    modal[0].style.display = "none";
+};
+
+
+
+
+
+
+
+
