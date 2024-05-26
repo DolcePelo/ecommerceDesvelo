@@ -18,7 +18,7 @@ const loginSession = async (req, res) => {
         req.session.user = email;
         req.session.name = result.first_name;
         req.session.last_name = result.last_name;
-        req.session.role = "admin";
+        req.session.role = result.role;
         res.status(200).json({
             respuesta: "ok",
         });

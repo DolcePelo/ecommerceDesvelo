@@ -97,7 +97,7 @@
     margin-left: 20px;
 }
 
-.checkoutButton:hover {
+.checkoutButton:hover{
     background-color: var(--secondary-color);
 }
 
@@ -197,8 +197,21 @@ button:hover {
     background-color: var(--secondary-color);
 }
 
-.forgot-link,
 .signup-link {
+    background-color: var(--primary-color);
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.singup-link:hover{
+    background-color: var(--secondary-color);
+}
+
+.forgot-link {
     display: block;
     margin-top: 10px;
     text-align: center;
@@ -206,8 +219,7 @@ button:hover {
     color: var(--primary-color);
 }
 
-.forgot-link:hover,
-.signup-link:hover {
+.forgot-link:hover {
     color: var(--secondary-color);
 }
 

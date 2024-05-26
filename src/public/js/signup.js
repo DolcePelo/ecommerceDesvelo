@@ -1,9 +1,10 @@
-async function postSignup(first_name, last_name, email, password) {
+async function postSignup(first_name, last_name, email, password, role) {
     const data = {
         first_name,
         last_name,
         email,
         password,
+        role,
     };
 
     const response = await fetch("/signup", {
@@ -26,8 +27,9 @@ signupForm.addEventListener("submit", async (event) => {
     const last_name = document.getElementById("last_name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const role = document.getElementById("role").value;
 
-    const result = await postSignup(first_name, last_name, email, password);
+    const result = await postSignup(first_name, last_name, email, password, role);
     if (result.response === "success") {
         window.location.href = "/login";
     } else {
