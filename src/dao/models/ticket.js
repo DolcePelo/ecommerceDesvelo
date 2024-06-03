@@ -5,7 +5,7 @@ const ticketCollection = "tickets";
 const ticketSchema = new mongoose.Schema({
     code: String,
     purchase_datetime: Date,
-    amout: Number,
+    amount: Number,
     purchaser: {
         type: mongoose.Types.ObjectId,
         ref: 'users'
@@ -14,7 +14,7 @@ const ticketSchema = new mongoose.Schema({
         type: [{
             product: {
                 type: mongoose.Types.ObjectId,
-                ref: 'products',
+                ref: 'product',
             },
             quantity: {
                 type: Number,

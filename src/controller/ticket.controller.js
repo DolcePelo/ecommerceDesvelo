@@ -27,43 +27,41 @@ const createTicket = async (req, res) => {
     let userFound = await UserModel.findById(user);
 
     let productDetails = cartFound.products.map(product => ({
-        productId: product.product,
+        product: product.product, // Cambiado a 'product' en lugar de 'productId'
         quantity: product.quantity
     }));
 
-    let productIds = productDetails.map(product => product.productId);
+    let productIds = productDetails.map(product => product.product);
 
     let actualProducts = await ProductModel.find({ _id: { $in: productIds } });
 
     let productsWithQuantity = actualProducts.map(product => {
-        let detail = productDetails.find(item => item.productId.equals(product._id));
+        let detail = productDetails.find(item => item.product.equals(product._id));
         let quantity = detail ? detail.quantity : 0;
-        return { ...product.toObject(), quantity };
+        return { product: product, quantity }; // Cambiado a 'product' en lugar de desestructurar
     });
 
-    let sum = productsWithQuantity.reduce((acc, product) => acc + product.price * product.quantity, 0);
+    let sum = productsWithQuantity.reduce((acc, product) => acc + product.product.price * product.quantity, 0);
 
     let ticketNumber = Date.now() + Math.floor(Math.random() * 1000);
 
     let newTicket = {
-        number: ticketNumber,
-        userFound,
-        products: productsWithQuantity.map(product => ({
-            productId: product._id,
-            quantity: product.quantity
-        })),
-        totalPrice: sum,
+        purchase_datetime: new Date(Date.now()),
+        code: ticketNumber,
+        purchaser: userFound._id,
+        products: productsWithQuantity,
+        amount: sum,
     };
 
     let result = await tickets.createTicket(newTicket);
     res.json({
-        user: userFound.email,
+        message: 'Ticket creado',
         cart: cartFound._id,
-        totalPrice: sum,
         status: "success",
         result: result
     });
 };
+
 
 const resolveTicket = async (req, res) => {
     console.log("Entrando en resolveTicket");
