@@ -15,7 +15,10 @@ export default class Ticket {
 
     getTicketById = async (id) => {
         try {
-            return await ticketModel.findById(id);
+            return await ticketModel.findById(id)
+            .populate('purchaser')
+            .populate('products.product')
+            .lean();
         } catch (error) {
             console.error("Error al obtener la orden", error)
         }

@@ -107,6 +107,62 @@ signupForm.addEventListener("submit", async (event) => {
     }
 })
 
+//Función para generar ticker y luego del login poder redirigir a la finalización de la compra
+async function postTicket(cart, user) {
+    let ticketId = "";
+    const response = await fetch("/api/ticket", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({cart, user})
+        });
+        const result = await response.json();
+        console.log(`postTicket result ${result.result._id}`);
+        ticketId = result.result._id;
+        window.location.href = `/ticket/${ticketId}`
+        return result;
+}
+
+//login de user: para finalizar compra 
+async function postLogin(email, password) {
+    let userId = localStorage.getItem("userId");
+    console.log("Initial userId from localStorage:", userId);
+    
+    try {
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        console.log("Response from server:", data); 
+
+        if(data.respuesta === "ok") {
+            userId = data.result._id;
+            localStorage.setItem("userId", userId);
+            console.log("New userId set in localStorage:", userId);
+            postTicket(cartId, userId);
+        } else {
+            alert("Datos incorrectos");
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+    }
+}
+
+const loginForm = document.getElementById("login-form");
+
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    postLogin(email, password);
+});
+
 
 
 

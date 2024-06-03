@@ -21,6 +21,7 @@ const loginSession = async (req, res) => {
         req.session.role = result.role;
         res.status(200).json({
             respuesta: "ok",
+            result,
         });
     }
 }

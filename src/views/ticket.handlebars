@@ -1,0 +1,18 @@
+<div>
+    <h1>Orden de compra #{{ticket.code}}</h1>
+    <p>Usuario: {{ticket.purchaser.email}}</p>
+    <p>Bienvenido: {{ticket.purchaser.first_name}}</p>
+    <h2>Productos</h2>
+    <ul>
+        {{#each ticket.products}}
+        <li>{{this.product.name}} - {{this.quantity}} x ${{this.product.price}}</li>
+        {{/each}}
+    </ul>
+    <p>Total: ${{ticket.amount}}</p>
+    <p>Fecha y hora: {{ticket.purchase_datetime}}</p>
+    <div class="button-container">
+        <button class="button-pay">Pagar</button>
+        <button class="button-pay">Volver al Carrito</button>
+    </div>
+</div>
+<script src="/js/ticket.js"></script>
