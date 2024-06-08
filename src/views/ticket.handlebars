@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <h1>Orden de compra #{{ticket.code}}</h1>
     <p>Usuario: {{ticket.purchaser.email}}</p>
     <p>Bienvenido: {{ticket.purchaser.first_name}}</p>
@@ -11,8 +11,9 @@
     <p>Total: ${{ticket.amount}}</p>
     <p>Fecha y hora: {{ticket.purchase_datetime}}</p>
     <div class="button-container">
-        <button class="button-pay">Pagar</button>
-        <button class="button-pay">Volver al Carrito</button>
+        <button class="button-pay" id="button-pay">Pagar</button>
+        <button class="button-pay" id="return-button">Volver al Carrito</button>
     </div>
 </div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="/js/ticket.js"></script>
