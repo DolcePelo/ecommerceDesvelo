@@ -23,10 +23,6 @@ import mokingProduct from "./routes/mokingproducts.route.js"
 import { __dirname } from "./utils.js";
 import { addLogger } from "./utils.js";
 import { helpers } from "./helper/handlebarsHelpers.js";
-// errorhandler
-// import errorHandler from "./middlewares/errorHandler.js";
-// import EErrors from "./services/enum.js";
-// import CustomError from "./services/CustomError.js";
 
 dotenv.config();
 
@@ -80,7 +76,8 @@ app.use(
 ////////////////////////////
 // Configuración de Handlebars
 const hbs = handlebars.create({
-    helpers 
+    helpers,
+    partialsDir: [`${__dirname}/views`]
 });
 
 app.engine("handlebars", hbs.engine);
@@ -107,14 +104,7 @@ app.use("/signup", signupRouter);
 app.use("/", sessionRouter);
 app.use("/mokingproducts", mokingProduct);
 app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
-// app.get("*", (req, res) => {
-//     CustomError.createError({
-//         name: "Estas perdido",
-//         cause: req.url,
-//         message: "La ruta que buscas no existe",
-//         code: EErrors.ROUTING_ERROR,
-//     });
-// });
+
 
 
 const server = app.listen(PORT, () => {
