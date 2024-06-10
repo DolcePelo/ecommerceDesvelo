@@ -20,6 +20,7 @@ import loginRouter from "./routes/login.route.js";
 import signupRouter from "./routes/signup.route.js";
 import sessionRouter from "./routes/session.route.js";
 import mokingProduct from "./routes/mokingproducts.route.js"
+import carrouselRouter from "./routes/carrousel.route.js";
 import { __dirname } from "./utils.js";
 import { addLogger } from "./utils.js";
 import { helpers } from "./helper/handlebarsHelpers.js";
@@ -97,7 +98,8 @@ app.use(addLogger);
 // Routes
 app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
-app.use("/api/ticket", ticketRouter)
+app.use("/api/ticket", ticketRouter);
+app.use("/api/carrousel", carrouselRouter);
 app.use("/", viewsRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
