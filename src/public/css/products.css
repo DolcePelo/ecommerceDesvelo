@@ -109,6 +109,11 @@ body {
     display: block;
 }
 
+.navbar.transparent {
+    background-color: rgba(248, 248, 248, 0.7);
+    transition: background-color 0.3s ease;
+}
+
 /**********************************************/
 /*******************CARROUSEL******************/
 .carousel {
@@ -143,6 +148,9 @@ body {
 }
 
 .productCard {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
     border: 1px solid var(--border-color);
     margin: 10px;
     padding: 15px;
@@ -162,12 +170,19 @@ body {
 
 .cardProduct__image img {
     max-width: 100%;
+    min-height: 400px;
+    object-fit: cover;
     height: auto;
     border-radius: 8px;
 }
 
 .cardProduct__info {
     margin-top: 10px;
+}
+
+.product-description{
+    max-height: 20px;
+    overflow: hidden;
 }
 
 .addCart:hover {

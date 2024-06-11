@@ -33,7 +33,7 @@ router.get("/products", async (req, res) => {
     const carrouselItems = carrouselImages.items;
 
     res.render("products", {
-        title: "Lista de productos",
+        title: "Desvelo",
         products: productsDocs,
         hasPrevPage,
         hasNextPage,
