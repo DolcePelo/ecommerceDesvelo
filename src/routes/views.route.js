@@ -2,6 +2,7 @@ import { Router } from "express";
 import Products from "../dao/dbManager/product.js";
 import { CartModel } from "../dao/models/cart.js";
 import Ticket from "../dao/dbManager/ticket.js";
+import carrouselService from "../dao/dbManager/carrouse.js";
 import dotenv from "dotenv";
 import { auth } from "../middlewares/index.js";
 
@@ -12,6 +13,9 @@ const router = Router();
 const DB_URL = process.env.DB_URL || "mongodb:localhost:27017/ecommerce";
 const products = new Products(DB_URL);
 const ticketService = new Ticket(DB_URL);
+const carrousels = new carrouselService(DB_URL);
+
+const CARROUSEL_ID = process.env.CARROUSEL_ID;
 
 router.get("/products", async (req, res) => {
     const { page = 1, limit = 4, sort = "asc", query } = req.query;
@@ -24,15 +28,20 @@ router.get("/products", async (req, res) => {
 
     const productsDocs = docs;
 
+    const carrouselImages = await carrousels.getCarrouselById(CARROUSEL_ID);
+    
+    const carrouselItems = carrouselImages.items;
+
     res.render("products", {
-        title: "Lista de productos",
+        title: "Desvelo",
         products: productsDocs,
         hasPrevPage,
         hasNextPage,
         prevPage,
         nextPage,
-        style: "css/products.css"
-    });
+        style: "css/products.css",
+        carrouselImages: carrouselItems
+    }); 
 });
 
 router.get("/realtime", auth, async (req, res) => {
